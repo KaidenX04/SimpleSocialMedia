@@ -1,0 +1,25 @@
+﻿using SimpleSocialMedia_ClassLibrary.DAL;
+using SimpleSocialMedia_ClassLibrary.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SimpleSocialMedia_ClassLibrary.BLL
+{
+    public class CommentServices
+    {
+        private readonly SimpleSocialMediaContext _context;
+
+        internal CommentServices(SimpleSocialMediaContext context)
+        {
+            _context = context;
+        }
+
+        public List<Comment> GetComment_Post(int postId) 
+        {
+            return _context.Comments.Where(x => x.PostID == postId).ToList();
+        }
+    }
+}

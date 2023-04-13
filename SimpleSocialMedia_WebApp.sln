@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSocialMedia_WebApp", "SimpleSocialMedia_WebApp\SimpleSocialMedia_WebApp.csproj", "{32CBE4E7-8FBB-4ADA-9D95-86163D9F7A8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSocialMedia_ClassLibrary", "SimpleSocialMedia_ClassLibrary\SimpleSocialMedia_ClassLibrary.csproj", "{8852B7B3-BBA1-478B-AE12-A1A3CD71AF29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32CBE4E7-8FBB-4ADA-9D95-86163D9F7A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32CBE4E7-8FBB-4ADA-9D95-86163D9F7A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32CBE4E7-8FBB-4ADA-9D95-86163D9F7A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32CBE4E7-8FBB-4ADA-9D95-86163D9F7A8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8852B7B3-BBA1-478B-AE12-A1A3CD71AF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8852B7B3-BBA1-478B-AE12-A1A3CD71AF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8852B7B3-BBA1-478B-AE12-A1A3CD71AF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8852B7B3-BBA1-478B-AE12-A1A3CD71AF29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {082A7E0E-1E43-4FE4-BDDD-4C61339A1801}
+	EndGlobalSection
+EndGlobal

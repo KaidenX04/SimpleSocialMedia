@@ -1,0 +1,12 @@
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\bin\Debug\net6.0\SimpleSocialMedia_ClassLibrary.deps.json
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\bin\Debug\net6.0\SimpleSocialMedia_ClassLibrary.dll
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\bin\Debug\net6.0\SimpleSocialMedia_ClassLibrary.pdb
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\SimpleSocialMedia_ClassLibrary.csproj.AssemblyReference.cache
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\SimpleSocialMedia_ClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\SimpleSocialMedia_ClassLibrary.AssemblyInfoInputs.cache
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\SimpleSocialMedia_ClassLibrary.AssemblyInfo.cs
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\SimpleSocialMedia_ClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\SimpleSocialMedia_ClassLibrary.dll
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\refint\SimpleSocialMedia_ClassLibrary.dll
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\SimpleSocialMedia_ClassLibrary.pdb
+C:\Users\kaide\Desktop\SimpleSocialMedia_WebApp\SimpleSocialMedia_ClassLibrary\obj\Debug\net6.0\ref\SimpleSocialMedia_ClassLibrary.dll

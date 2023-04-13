@@ -1,0 +1,24 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (!ModelState.IsValid)
+{
+    <div asp-validation-summary="All" class="alert alert-danger">
+
+    </div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <form class="form" method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" asp-for="Username"/>
+        <label for="password">Password</label>
+        <input type="password" id="password" asp-for="Password" />
+        <input class="btn btn-primary" type="submit" value="Sign Up" asp-page-handler="SignUp"/>
+        <input class="btn btn-primary" type="submit" value="Log In" asp-page-handler="LogIn" />
+    </form>
+</div>
