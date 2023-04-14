@@ -21,5 +21,11 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
         {
             return _context.Comments.Where(x => x.PostID == postId).ToList();
         }
+
+        public void CreateComment(Comment comment) 
+        { 
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
+        }
     }
 }

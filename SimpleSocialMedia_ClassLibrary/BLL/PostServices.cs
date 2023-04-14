@@ -4,7 +4,7 @@ using SimpleSocialMedia_ClassLibrary.Entities;
 
 namespace SimpleSocialMedia_ClassLibrary.BLL
 {
-    internal class PostServices
+    public class PostServices
     {
         private readonly SimpleSocialMediaContext _context;
 
@@ -15,12 +15,26 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
         
         public List<Post> GetPosts_All() 
         {
-            return _context.Posts.ToList();
+            return _context.Posts.OrderByDescending(x => x.PostID).ToList();
         }
 
         public List<Post> GetPosts_Account(int accountID) 
         {
             return _context.Posts.Where(x => x.AccountID == accountID).ToList();
+        }
+
+        public void CreatePost(Post post)
+        {
+            _context.Posts.Add(post);
+            _context.SaveChanges();
+        }
+
+        public void LikePost(int postID)
+        {
+            Post post = _context.Posts.Where(x => x.PostID == postID).FirstOrDefault();
+            post.Likes += 1;
+            _context.Posts.Update(post);
+            _context.SaveChanges();
         }
     }
 }

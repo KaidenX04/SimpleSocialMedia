@@ -30,5 +30,17 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
             _context.Accounts.Add(account);
             _context.SaveChanges();
         }
+
+        public void ChangePassword(int accountID, string password)
+        {
+            Account account = _context.Accounts.Where(x => x.AccountID == accountID).FirstOrDefault();
+
+            if (account != null)
+            {
+                account.Password = password;
+                _context.Accounts.Update(account);
+                _context.SaveChanges();
+            }
+        }
     }
 }

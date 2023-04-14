@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SimpleSocialMedia_ClassLibrary.BLL;
+using SimpleSocialMedia_ClassLibrary.Entities;
 
 namespace SimpleSocialMedia_WebApp.Pages
 {
@@ -25,7 +26,7 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         }
 
-        public void OnPostSignUp()
+        public IActionResult OnPostSignUp()
         {
             if (string.IsNullOrWhiteSpace(Username))
             {
@@ -38,7 +39,32 @@ namespace SimpleSocialMedia_WebApp.Pages
             if (ModelState.IsValid) 
             {
                 _accountServices.CreateAccount(Username, Password);
+                Account login = _accountServices.GetAccount_Login(Username, Password);
+
+                return Redirect($"/Main/{login.AccountID}");
             }
+            return Page();
+        }
+
+        public IActionResult OnPostLogIn()
+        {
+            if (string.IsNullOrWhiteSpace(Username))
+            {
+                ModelState.AddModelError(nameof(Username), "Username cannot be blank!");
+            }
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                ModelState.AddModelError(nameof(Password), "Password cannot be blank!");
+            }
+            if (ModelState.IsValid)
+            {
+                Account login = _accountServices.GetAccount_Login(Username, Password);
+                if (login != null) 
+                {
+                    return Redirect($"/Main/{login.AccountID}");
+                }
+            }
+            return Page();
         }
     }
 }

@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.width-0 {
+    max-width: 0px;
+    overflow: hidden;
+}

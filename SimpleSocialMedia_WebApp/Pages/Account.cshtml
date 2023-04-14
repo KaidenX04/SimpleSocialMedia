@@ -1,0 +1,10 @@
+﻿@page "{AccountID}"
+@model SimpleSocialMedia_WebApp.Pages.AccountModel
+@{
+    ViewData["Title"] = "Account";
+}
+
+<div class="container">
+    <h1>@Model.Login.Username</h1>
+    <h2>Posts: @Model.Login.Posts.Count</h2>
+</div>
