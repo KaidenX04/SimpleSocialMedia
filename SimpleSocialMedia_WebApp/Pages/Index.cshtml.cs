@@ -21,9 +21,21 @@ namespace SimpleSocialMedia_WebApp.Pages
             _accountServices = accountServices;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            Account account = null;
+            string loginToken = Request.Cookies["LoginToken"];
 
+            if (loginToken != null) 
+            {
+                account = _accountServices.GetAccount_Token(loginToken);
+            }
+
+            if (account != null) 
+            {
+                return Redirect("/Main");
+            }
+            return Page();
         }
 
         public IActionResult OnPostSignUp()
@@ -40,8 +52,8 @@ namespace SimpleSocialMedia_WebApp.Pages
             {
                 _accountServices.CreateAccount(Username, Password);
                 Account login = _accountServices.GetAccount_Login(Username, Password);
-
-                return Redirect($"/Main/{login.AccountID}");
+                Response.Cookies.Append("LoginToken", $"{login.AuthToken}");
+                return RedirectToPage("Main");
             }
             return Page();
         }
@@ -58,10 +70,15 @@ namespace SimpleSocialMedia_WebApp.Pages
             }
             if (ModelState.IsValid)
             {
-                Account login = _accountServices.GetAccount_Login(Username, Password);
-                if (login != null) 
+                try
                 {
-                    return Redirect($"/Main/{login.AccountID}");
+                    Account login = _accountServices.GetAccount_Login(Username, Password);
+                    Response.Cookies.Append("LoginToken", $"{login.AuthToken}");
+                    return RedirectToPage("Main");
+                }
+                catch (Exception ex) 
+                {
+                    ModelState.AddModelError("Account", "Account not found with these credentials");
                 }
             }
             return Page();

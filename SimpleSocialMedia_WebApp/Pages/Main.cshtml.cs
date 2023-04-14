@@ -7,8 +7,11 @@ namespace SimpleSocialMedia_WebApp.Pages
 {
     public class MainModel : PageModel
     {
-        [BindProperty(SupportsGet = true)]
         public int AccountID { get; set; }
+
+        public string LoginToken { get; set; }
+
+        public Account Login { get; set; }
 
         [BindProperty]
         public int PostID { get; set; }
@@ -27,8 +30,6 @@ namespace SimpleSocialMedia_WebApp.Pages
         [BindProperty]
         public string CommentText { get; set; }
 
-        public Account Login;
-
         public List<Post> Posts;
 
         public MainModel(AccountServices accountServices, PostServices postServices, CommentServices commentServices)
@@ -40,8 +41,10 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public void OnGet()
         {
-            Login = _accountServices.GetAccount_ID(AccountID);
             Posts = _postServices.GetPosts_All();
+            LoginToken = Request.Cookies["LoginToken"];
+            Login = _accountServices.GetAccount_Token(LoginToken);
+            AccountID = Login.AccountID;
         }
 
         public IActionResult OnPostLikePost()
@@ -52,12 +55,15 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public IActionResult OnPostComment()
         {
-            Comment comment = new();
-            comment.Text = CommentText;
-            comment.AccountID = AccountID;
-            comment.PostID = PostID;
-            comment.Likes = 0;
-            _commentServices.CreateComment(comment);
+            if (!string.IsNullOrWhiteSpace(CommentText))
+            {
+                Comment comment = new();
+                comment.Text = CommentText;
+                comment.AccountID = AccountID;
+                comment.PostID = PostID;
+                comment.Likes = 0;
+                _commentServices.CreateComment(comment);
+            }
             return RedirectToPage();
         }
 

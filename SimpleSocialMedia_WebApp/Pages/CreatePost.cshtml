@@ -1,12 +1,16 @@
-﻿@page "{AccountID}"
+﻿@page
 @model SimpleSocialMedia_WebApp.Pages.CreatePostModel
 @{
     ViewData["title"] = "New Post";
 }
 
-<form method="post">
-    <label for="text-input">Post Text</label>
-    <textarea id="text-input" asp-for="PostText"></textarea>
+<div class="container d-flex justify-content-center">
+    <form method="post" class="bg-dark d-flex flex-column p-3 text-white rounded mt-3 w-75">
+        <label for="text-input">Post Text</label>
+        <textarea id="text-input" asp-for="PostText" class="mb-3"></textarea>
 
-    <input type="submit" class="btn btn-primary" asp-page-handler="CreatePost"/>
-</form>
+        <input type="submit" class="btn btn-primary" value="Post" asp-page-handler="CreatePost" />
+    </form>
+</div>
+
+

@@ -8,7 +8,7 @@ using SimpleSocialMedia_ClassLibrary.Entities;
 
 namespace SimpleSocialMedia_ClassLibrary.DAL
 {
-    internal partial class SimpleSocialMediaContext : DbContext
+    public partial class SimpleSocialMediaContext : DbContext
     {
         public SimpleSocialMediaContext()
         {
@@ -31,13 +31,13 @@ namespace SimpleSocialMedia_ClassLibrary.DAL
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.AccountID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comment__Account__3B75D760");
+                    .HasConstraintName("FK__Comment__Account__4F7CD00D");
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.PostID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comment__PostID__3C69FB99");
+                    .HasConstraintName("FK__Comment__PostID__5070F446");
             });
 
             modelBuilder.Entity<Post>(entity =>
@@ -46,7 +46,7 @@ namespace SimpleSocialMedia_ClassLibrary.DAL
                     .WithMany(p => p.Posts)
                     .HasForeignKey(d => d.AccountID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Post__AccountID__38996AB5");
+                    .HasConstraintName("FK__Post__AccountID__4CA06362");
             });
 
             OnModelCreatingPartial(modelBuilder);

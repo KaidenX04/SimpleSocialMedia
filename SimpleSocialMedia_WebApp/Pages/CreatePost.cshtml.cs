@@ -7,14 +7,13 @@ namespace SimpleSocialMedia_WebApp.Pages
 {
     public class CreatePostModel : PageModel
     {
-        [BindProperty(SupportsGet = true)]
-        public int AccountID { get; set; }
-
         private readonly AccountServices _accountServices;
 
         private readonly PostServices _postServices;
 
-        public Account Login;
+        public Account Login { get; set; }
+
+        private string LoginToken { get; set; }
 
         [BindProperty]
         public string PostText { get; set; }
@@ -31,12 +30,14 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public IActionResult OnPostCreatePost()
         {
+            LoginToken = Request.Cookies["LoginToken"];
+            Login = _accountServices.GetAccount_Token(LoginToken);
             Post post = new();
-            post.AccountID = AccountID;
+            post.AccountID = Login.AccountID;
             post.Text = PostText;
             post.Likes = 0;
             _postServices.CreatePost(post);
-            return Redirect($"/Main/{AccountID}");
+            return Redirect($"/Main");
         }
     }
 }

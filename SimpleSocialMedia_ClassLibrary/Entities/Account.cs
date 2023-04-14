@@ -19,6 +19,9 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
 
         [Key]
         public int AccountID { get; set; }
+        [StringLength(20)]
+        [Unicode(false)]
+        public string AuthToken { get; set; }
         [Required]
         [StringLength(30)]
         [Unicode(false)]

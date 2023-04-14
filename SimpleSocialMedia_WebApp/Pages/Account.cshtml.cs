@@ -13,7 +13,9 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         private readonly AccountServices _accountServices;
 
-        public Account Login;
+        public Account Login { get; set; }
+
+        private string LoginToken { get; set; }
 
         public AccountModel(AccountServices accountServices)
         {
@@ -22,7 +24,8 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public void OnGet()
         {
-            Login = _accountServices.GetAccount_ID(AccountID);
+            LoginToken = Request.Cookies["LoginToken"];
+            Login = _accountServices.GetAccount_Token(LoginToken);
         }
     }
 }

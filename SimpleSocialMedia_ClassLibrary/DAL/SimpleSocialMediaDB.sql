@@ -1,5 +1,6 @@
 CREATE TABLE Account (
 	AccountID int not null identity(0, 1) primary key,
+	AuthToken varchar(20) null,
 	Username varchar(30) not null,
 	Password varchar(30) not null
 );

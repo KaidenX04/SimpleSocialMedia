@@ -11,14 +11,20 @@
     </div>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <form class="form" method="post">
-        <label for="username">Username</label>
-        <input type="text" id="username" asp-for="Username"/>
-        <label for="password">Password</label>
-        <input type="password" id="password" asp-for="Password" />
-        <input class="btn btn-primary" type="submit" value="Sign Up" asp-page-handler="SignUp"/>
-        <input class="btn btn-primary" type="submit" value="Log In" asp-page-handler="LogIn" />
+<div class="text-center container">
+    <h1 class="display-4 mt-3">Welcome</h1>
+    <form class="form d-flex flex-column bg-dark text-white justify-content-center align-content-center p-3 rounded w-lg-50 mx-auto" method="post">
+        <div>
+            <label class="d-block" for="username">Username</label>
+            <input class="d-block mx-auto" type="text" id="username" asp-for="Username" />
+        </div>
+        <div>
+            <label class="d-block" for="password">Password</label>
+            <input class="d-block mx-auto" type="password" id="password" asp-for="Password" />
+        </div>
+        <div class="mt-3">
+            <input class="btn btn-primary" type="submit" value="Sign Up" asp-page-handler="SignUp" />
+            <input class="btn btn-primary" type="submit" value="Log In" asp-page-handler="LogIn" />
+        </div>
     </form>
 </div>
