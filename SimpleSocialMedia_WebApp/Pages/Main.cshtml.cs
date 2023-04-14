@@ -9,12 +9,14 @@ namespace SimpleSocialMedia_WebApp.Pages
     {
         public int AccountID { get; set; }
 
-        public string LoginToken { get; set; }
-
         public Account Login { get; set; }
 
         [BindProperty]
         public int PostID { get; set; }
+
+
+        [BindProperty]
+        public int CommentID { get; set; }
 
         [BindProperty]
         public int ViewCommentPost { get; set; } = -1;
@@ -39,12 +41,19 @@ namespace SimpleSocialMedia_WebApp.Pages
             _commentServices = commentServices;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             Posts = _postServices.GetPosts_All();
-            LoginToken = Request.Cookies["LoginToken"];
-            Login = _accountServices.GetAccount_Token(LoginToken);
+            string username = Request.Cookies["Username"];
+            string password = Request.Cookies["Password"];
+            Login = _accountServices.GetAccount_Login(username, password);
+
+            if (Login == null)
+            {
+                return Redirect("/Index");
+            }
             AccountID = Login.AccountID;
+            return Page();
         }
 
         public IActionResult OnPostLikePost()
@@ -64,7 +73,12 @@ namespace SimpleSocialMedia_WebApp.Pages
                 comment.Likes = 0;
                 _commentServices.CreateComment(comment);
             }
-            return RedirectToPage();
+            Posts = _postServices.GetPosts_All();
+            ViewCommentPost = PostID;
+            Comments = _commentServices.GetComment_Post(PostID);
+            CommentText = " ";
+            ModelState.Clear();
+            return Page();
         }
 
         public IActionResult OnPostViewComment()
@@ -73,6 +87,20 @@ namespace SimpleSocialMedia_WebApp.Pages
             Comments = _commentServices.GetComment_Post(PostID);
             Posts = _postServices.GetPosts_All();
             return Page();
+        }
+
+        public string GetUsernameFromComment(Comment comment)
+        {
+            int AccountID = comment.AccountID;
+            Account account = _accountServices.GetAccount_ID(AccountID);
+            return account.Username;
+        }
+
+        public string GetUsernameFromPost(Post post)
+        {
+            int AccountID = post.AccountID;
+            Account account = _accountServices.GetAccount_ID(AccountID);
+            return account.Username;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
 
         public List<Comment> GetComment_Post(int postId) 
         {
-            return _context.Comments.Where(x => x.PostID == postId).ToList();
+            return _context.Comments.Where(x => x.PostID == postId).OrderBy(x => x.PostID).ToList();
         }
 
         public void CreateComment(Comment comment) 

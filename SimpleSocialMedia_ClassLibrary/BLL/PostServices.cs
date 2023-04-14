@@ -36,5 +36,10 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
             _context.Posts.Update(post);
             _context.SaveChanges();
         }
+
+        public int GetPostCount_Account(int accountID)
+        {
+            return _context.Posts.Where(x => x.AccountID == accountID).Count();
+        }
     }
 }

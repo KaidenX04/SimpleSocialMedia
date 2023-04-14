@@ -13,8 +13,6 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public Account Login { get; set; }
 
-        private string LoginToken { get; set; }
-
         [BindProperty]
         public string PostText { get; set; }
 
@@ -30,8 +28,13 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public IActionResult OnPostCreatePost()
         {
-            LoginToken = Request.Cookies["LoginToken"];
-            Login = _accountServices.GetAccount_Token(LoginToken);
+            string username = Request.Cookies["Username"];
+            string password = Request.Cookies["Password"];
+            Login = _accountServices.GetAccount_Login(username, password);
+            if (Login == null)
+            {
+                return Redirect("/Index");
+            }
             Post post = new();
             post.AccountID = Login.AccountID;
             post.Text = PostText;

@@ -4,7 +4,9 @@
     ViewData["Title"] = "Account";
 }
 
-<div class="container">
-    <h1>@Model.Login.Username</h1>
-    <h2>Posts: @Model.Login.Posts.Count</h2>
+<div class="container mt-3">
+    <div class="w-75 bg-dark text-white rounded mx-auto p-3">
+        <h1>@Model.Login.Username</h1>
+        <h2>Posts: @Model.PostsCount</h2>
+    </div>
 </div>

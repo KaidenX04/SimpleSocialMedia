@@ -13,19 +13,29 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         private readonly AccountServices _accountServices;
 
+        private readonly PostServices _postServices;
+
         public Account Login { get; set; }
 
-        private string LoginToken { get; set; }
+        public int PostsCount { get; set; }
 
-        public AccountModel(AccountServices accountServices)
+        public AccountModel(AccountServices accountServices, PostServices postServices)
         {
             _accountServices = accountServices;
+            _postServices = postServices;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            LoginToken = Request.Cookies["LoginToken"];
-            Login = _accountServices.GetAccount_Token(LoginToken);
+            string username = Request.Cookies["Username"];
+            string password = Request.Cookies["Password"];
+            Login = _accountServices.GetAccount_Login(username, password);
+            if (Login == null)
+            {
+                return Redirect("/Index");
+            }
+            PostsCount = _postServices.GetPostCount_Account(Login.AccountID);
+            return Page();
         }
     }
 }

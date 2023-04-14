@@ -1,4 +1,5 @@
-﻿using SimpleSocialMedia_ClassLibrary.DAL;
+﻿using System.Security.Principal;
+using SimpleSocialMedia_ClassLibrary.DAL;
 using SimpleSocialMedia_ClassLibrary.Entities;
 
 namespace SimpleSocialMedia_ClassLibrary.BLL
@@ -14,35 +15,12 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
 
         public Account GetAccount_Login(string username, string password)
         {
-            Account account = _context.Accounts.Where(x => x.Username == username && x.Password == password).First();
-            if (account == null)
-            {
-                throw new Exception("Account not found");
-            }
-
-            string token;
-            Account tokenExists = null;
-
-            do
-            {
-                token = GenerateToken();
-                tokenExists = _context.Accounts.Where(x => x.AuthToken == token).FirstOrDefault();
-            } while (tokenExists != null);
-
-            account.AuthToken = token;
-            _context.Accounts.Update(account);
-            _context.SaveChanges();
-            return account;
+            return _context.Accounts.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
         }
 
         public Account GetAccount_ID(int id)
         {
             return _context.Accounts.Where(x => x.AccountID == id).First();
-        }
-
-        public Account GetAccount_Token(string token) 
-        {
-            return _context.Accounts.Where(x => x.AuthToken == token).FirstOrDefault();
         }
 
         public void CreateAccount(string username, string password) 

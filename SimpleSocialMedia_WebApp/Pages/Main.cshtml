@@ -9,31 +9,39 @@
 </div>
 
 
-<ul>
+<ul class="list-group">
     @foreach(var post in Model.Posts)
     {
-        <li class="d-flex justify-content-center flex-wrap text-center mb-3 bg-dark w-75 mx-auto text-white rounded p-3">
-            <p class="w-100">@post.Text</p>
-            <p class="w-100">Likes: @post.Likes</p>
+        <li class="d-flex justify-content-center flex-wrap mb-3 bg-dark w-75 mx-auto text-white rounded p-3">
+            <h3 class="w-100 text-left">@Model.GetUsernameFromPost(post)</h3>
+            <div class="p-3 bg-secondary text-left w-100 rounded">
+                <p class="w-100 m-0 text-left">@post.Text</p>
+            </div>
+            <p class="w-100 text-center mt-2">Likes: @post.Likes</p>
             <form method="post" class="mx-auto" class="d-flex justify-content-center">
                 <input type="text" asp-for="PostID" value="@post.PostID" class="invisible width-0">
-                <input type="submit" asp-page-handler="LikePost" value="Like">
-                <input type="text" asp-for="CommentText">
-                <input type="submit" asp-page-handler="Comment" value="Comment">
-                <input type="submit" asp-page-handler="ViewComment" value="View Comments">
+                <input type="submit" asp-page-handler="LikePost" class="btn btn-primary" value="Like">
+                <input type="submit" asp-page-handler="ViewComment" class="btn btn-primary" value="Comments">
             </form>
 
-            @if (Model.ViewCommentPost == post.PostID) 
+            @if (Model.ViewCommentPost == post.PostID)
             {
-                <ul>
-                @foreach(var comment in Model.Comments)
-                {
-                    <li>
-                        <p>@comment.Text</p>
-                        <p>@comment.Likes</p>
-                    </li>
-                }
-            </ul>
+                <div class="divider-line">
+                </div>
+                <form method="post" class="w-100 mt-3 text-center">
+                    <input type="text" asp-for="PostID" value="@post.PostID" class="invisible width-0">
+                    <input type="text" asp-for="CommentText" class="form-control w-75 mb-1 mx-auto">
+                    <input type="submit" asp-page-handler="Comment" class="btn btn-primary" value="Comment">
+                </form>
+                <ul class="list-group mt-3 w-100 ">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <li class="list-group-item m-1 w-100 p-1 bg-secondary text-white">
+                            <h4 class="font-weight-bold">@Model.GetUsernameFromComment(comment)</h4>
+                            <p>@comment.Text</p>
+                        </li>
+                    }
+                </ul>
             }
         </li>
     }

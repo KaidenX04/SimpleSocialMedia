@@ -21,3 +21,12 @@ body {
     max-width: 0px;
     overflow: hidden;
 }
+
+.divider-line {
+    margin-top: 2rem;
+    min-height: 1px;
+    max-height: 1px;
+    width: 100%;
+    background-color: white;
+    display: block;
+}

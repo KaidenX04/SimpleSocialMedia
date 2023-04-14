@@ -8,9 +8,13 @@ namespace SimpleSocialMedia_WebApp.Pages
     {
         public IActionResult OnGet()
         {
-            if (Request.Cookies["LoginToken"] != null)
+            if (Request.Cookies["Username"] != null)
             {
-                Response.Cookies.Delete("LoginToken");
+                Response.Cookies.Delete("Username");
+            }
+            if (Request.Cookies["Password"] != null)
+            {
+                Response.Cookies.Delete("Password");
             }
             return Redirect("/Index");
         }
