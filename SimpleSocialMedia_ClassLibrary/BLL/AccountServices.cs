@@ -67,7 +67,7 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
             Account account = _context.Accounts.Where(x => x.Username == username).FirstOrDefault();
             if (account == null)
             {
-                throw new Exception("Account not found");
+                return -1;
             }
             return account.AccountID;
         }

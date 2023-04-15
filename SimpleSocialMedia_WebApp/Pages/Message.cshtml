@@ -1,0 +1,25 @@
+﻿@page "{ChatAccountID}"
+@model SimpleSocialMedia_WebApp.Pages.MessageModel
+@{
+    ViewData["title"] = "Message";
+}
+
+<div class="w-100 d-flex justify-content-center my-3">
+    <a href="/Chat" class="btn btn-primary">Back</a>
+</div>
+
+
+<form method="post" class="container d-flex justify-content-center bg-dark text-white max-width-50 mx-auto p-3 rounded mt-3 flex-wrap">
+    <input type="text" asp-for="MessageText" class="form-control w-100" />
+    <input type="submit" asp-page-handler="SendMessage" value="Send" class="btn btn-primary d-block mx-auto mt-2" />
+</form>
+
+<div class="container bg-dark text-white max-width-50 rounded p-3">
+    @foreach (var message in Model.messages)
+    {
+        <div class="my-3">
+            <h4>@Model.GetUsername_AccountID(message.AccountID)</h4>
+            <p>@message.Text</p>
+        </div>
+    }
+</div>

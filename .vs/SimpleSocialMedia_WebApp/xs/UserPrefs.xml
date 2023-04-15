@@ -3,25 +3,31 @@
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.SimpleSocialMedia__WebApp PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SimpleSocialMedia_ClassLibrary/DAL/SimpleSocialMediaDB.sql">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SimpleSocialMedia_WebApp/Pages/CreateChat.cshtml">
     <Files>
-      <File FileName="SimpleSocialMedia_WebApp/Pages/Account.cshtml" Line="13" Column="1" />
-      <File FileName="SimpleSocialMedia_WebApp/Pages/Account.cshtml.cs" Line="34" Column="1" />
-      <File FileName="SimpleSocialMedia_ClassLibrary/DAL/SimpleSocialMediaDB.sql" Line="16" Column="21" />
-      <File FileName="SimpleSocialMedia_WebApp/appsettings.json" Line="10" Column="137" />
+      <File FileName="SimpleSocialMedia_WebApp/Pages/Chat.cshtml" Line="23" Column="6" />
+      <File FileName="SimpleSocialMedia_WebApp/Pages/Chat.cshtml.cs" Line="62" Column="1" />
+      <File FileName="SimpleSocialMedia_ClassLibrary/BLL/AccountServices.cs" Line="24" Column="1" />
+      <File FileName="SimpleSocialMedia_WebApp/Pages/Main.cshtml" Line="7" Column="1" />
+      <File FileName="SimpleSocialMedia_WebApp/Pages/Message.cshtml" Line="13" Column="54" />
+      <File FileName="SimpleSocialMedia_WebApp/Pages/CreatePost.cshtml" Line="1" Column="1" />
+      <File FileName="SimpleSocialMedia_WebApp/Pages/CreateChat.cshtml" Line="17" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SimpleSocialMedia_WebApp" expanded="True">
             <Node name="SimpleSocialMedia_ClassLibrary" expanded="True">
-              <Node name="BLL" selected="True" />
-              <Node name="DAL" expanded="True" />
+              <Node name="BLL" expanded="True" />
               <Node name="Entities" expanded="True" />
             </Node>
             <Node name="SimpleSocialMedia_WebApp" expanded="True">
               <Node name="Pages" expanded="True">
-                <Node name="Account.cshtml" expanded="True" />
+                <Node name="Shared" expanded="True">
+                  <Node name="_Layout.cshtml" expanded="True" />
+                </Node>
+                <Node name="Chat.cshtml" expanded="True" />
+                <Node name="CreateChat.cshtml" expanded="True" selected="True" />
               </Node>
               <Node name="wwwroot" expanded="True" />
             </Node>

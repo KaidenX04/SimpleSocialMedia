@@ -30,7 +30,8 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
 
         public List<Message> GetMessage_ChatAndAccountID(int chatId, int accountId)
         {
-            return _context.Messages.Where(x => x.ChatID == chatId && x.AccountID == accountId).ToList();
+            List<Message> messages = _context.Messages.Where(x => x.ChatID == chatId && x.AccountID == accountId).ToList();
+            return messages;
         }
     }
 }

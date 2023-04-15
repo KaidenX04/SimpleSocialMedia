@@ -1,6 +1,25 @@
 ﻿@page
 @model SimpleSocialMedia_WebApp.Pages.CreateChatModel
-@{
+@{ViewData["title"] = "Create Chat";
 }
 
-<h1>Lol</h1>
+@if (!ModelState.IsValid)
+{
+    <div asp-validation-summary="All" class="alert alert-danger">
+
+    </div>
+}
+
+<div class="w-100 d-flex justify-content-center my-3">
+    <a href="/Chat" class="btn btn-primary">Back</a>
+</div>
+
+
+<div class="container max-width-50 bg-dark text-white mx-auto mt-3 p-3">
+    <form method="post">
+        <h2 class="w-100 text-center">Who are you chatting with?</h2>
+        <input class="invisible width-o" value="@Model.AccountID" asp-for="AccountID" />
+        <input type="text" id="username" asp-for="Username" class="form-control mb-3" placeholder="Their username" />
+        <input type="submit" asp-page-handler="CreateChat" value="Chat" class="btn btn-primary mx-auto d-block" />
+    </form>
+</div>
