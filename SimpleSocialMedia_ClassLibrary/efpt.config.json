@@ -19,11 +19,19 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Chat]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Comment]",
          "ObjectType": 0
       },
       {
          "Name": "[dbo].[Likes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Message]",
          "ObjectType": 0
       },
       {

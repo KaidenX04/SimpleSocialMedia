@@ -13,8 +13,11 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
     {
         public Account()
         {
+            ChatAccount1s = new HashSet<Chat>();
+            ChatAccount2s = new HashSet<Chat>();
             Comments = new HashSet<Comment>();
             Likes = new HashSet<Like>();
+            Messages = new HashSet<Message>();
             Posts = new HashSet<Post>();
         }
 
@@ -32,10 +35,16 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
         [Unicode(false)]
         public string Password { get; set; }
 
+        [InverseProperty("Account1")]
+        public virtual ICollection<Chat> ChatAccount1s { get; set; }
+        [InverseProperty("Account2")]
+        public virtual ICollection<Chat> ChatAccount2s { get; set; }
         [InverseProperty("Account")]
         public virtual ICollection<Comment> Comments { get; set; }
         [InverseProperty("Account")]
         public virtual ICollection<Like> Likes { get; set; }
+        [InverseProperty("Account")]
+        public virtual ICollection<Message> Messages { get; set; }
         [InverseProperty("Account")]
         public virtual ICollection<Post> Posts { get; set; }
     }
