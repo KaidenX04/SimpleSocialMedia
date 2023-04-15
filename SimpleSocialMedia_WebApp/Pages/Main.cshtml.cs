@@ -9,7 +9,7 @@ namespace SimpleSocialMedia_WebApp.Pages
     {
         public int AccountID { get; set; }
 
-        public Account Login { get; set; }
+        public Account Login;
 
         [BindProperty]
         public int PostID { get; set; }
@@ -48,15 +48,12 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public IActionResult OnGet()
         {
-            Posts = _postServices.GetPosts_All();
-            string username = Request.Cookies["Username"];
-            string password = Request.Cookies["Password"];
-            Login = _accountServices.GetAccount_Login(username, password);
-
-            if (Login == null)
+            if (!ValidLogin(out Login))
             {
-                return Redirect("/Index");
+                return Redirect("Index");
             }
+
+            Posts = _postServices.GetPosts_All();
             AccountID = Login.AccountID;
             ViewCommentPost = -1;
             return null;
@@ -64,16 +61,17 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public IActionResult OnPostLikePost()
         {
-            string username = Request.Cookies["Username"];
-            string password = Request.Cookies["Password"];
-            Login = _accountServices.GetAccount_Login(username, password);
-            AccountID = Login.AccountID;
+            if (!ValidLogin(out Login))
+            {
+                return Redirect("Index");
+            }
 
             if (!_likeServices.IsLiked(AccountID, PostID))
             {
                 _likeServices.CreateLike(AccountID, PostID);
                 _postServices.LikePost(PostID);
             }
+
             if (ViewingComments == 1)
             {
                 Posts = _postServices.GetPosts_All();
@@ -82,6 +80,7 @@ namespace SimpleSocialMedia_WebApp.Pages
                 ModelState.Clear();
                 return Page();
             }
+
             ViewingComments = 0;
             ViewCommentPost = -1;
             Comments = _commentServices.GetComment_Post(PostID);
@@ -92,9 +91,11 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public IActionResult OnPostComment()
         {
-            string username = Request.Cookies["Username"];
-            string password = Request.Cookies["Password"];
-            Login = _accountServices.GetAccount_Login(username, password);
+            if (!ValidLogin(out Login))
+            {
+                return Redirect("Index");
+            }
+
             AccountID = Login.AccountID;
 
             if (!string.IsNullOrWhiteSpace(CommentText))
@@ -106,6 +107,7 @@ namespace SimpleSocialMedia_WebApp.Pages
                 comment.Likes = 0;
                 _commentServices.CreateComment(comment);
             }
+
             Posts = _postServices.GetPosts_All();
             ViewCommentPost = PostID;
             Comments = _commentServices.GetComment_Post(PostID);
@@ -141,6 +143,18 @@ namespace SimpleSocialMedia_WebApp.Pages
             int AccountID = post.AccountID;
             Account account = _accountServices.GetAccount_ID(AccountID);
             return account.Username;
+        }
+
+        public bool ValidLogin(out Account? account)
+        {
+            string username = Request.Cookies["Username"];
+            string password = Request.Cookies["Password"];
+            account = _accountServices.GetAccount_Login(username, password);
+            if (account == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

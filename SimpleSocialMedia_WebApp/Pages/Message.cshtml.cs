@@ -35,14 +35,12 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public IActionResult OnGet()
         {
-            string username = Request.Cookies["Username"];
-            string password = Request.Cookies["Password"];
-            Account login = _accountServices.GetAccount_Login(username, password);
-            if (login == null)
+            Account account;
+            if (!ValidLogin(out account))
             {
                 return Redirect("/index");
             }
-            Chat chat = _chatServices.GetChat_BothAccount(login.AccountID, ChatAccountID);
+            Chat chat = _chatServices.GetChat_BothAccount(account.AccountID, ChatAccountID);
             messages = _messageServices.GetMessage_ChatID(chat.ChatID);
             messages.Reverse();
             return Page();
@@ -57,10 +55,8 @@ namespace SimpleSocialMedia_WebApp.Pages
         public IActionResult OnPostSendMessage()
         {
             Chat chat;
-            string username = Request.Cookies["Username"];
-            string password = Request.Cookies["Password"];
-            Account login = _accountServices.GetAccount_Login(username, password);
-            if (login == null)
+            Account login;
+            if (!ValidLogin(out login))
             {
                 return Redirect("/index");
             }
@@ -78,6 +74,18 @@ namespace SimpleSocialMedia_WebApp.Pages
             ModelState.Clear();
             MessageText = "";
             return Page();
+        }
+
+        public bool ValidLogin(out Account? account)
+        {
+            string username = Request.Cookies["Username"];
+            string password = Request.Cookies["Password"];
+            account = _accountServices.GetAccount_Login(username, password);
+            if (account == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
