@@ -14,6 +14,7 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
         [Key]
         public int MessageID { get; set; }
         public int AccountID { get; set; }
+        public int ChatID { get; set; }
         [Required]
         [StringLength(200)]
         [Unicode(false)]
@@ -22,5 +23,9 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
         [ForeignKey("AccountID")]
         [InverseProperty("Messages")]
         public virtual Account Account { get; set; }
+
+        [ForeignKey("ChatID")]
+        [InverseProperty("Messages")]
+        public virtual Chat Chat { get; set; }
     }
 }

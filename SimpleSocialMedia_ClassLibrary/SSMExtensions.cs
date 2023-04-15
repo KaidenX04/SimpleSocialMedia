@@ -35,6 +35,16 @@ namespace SimpleSocialMedia_ClassLibrary
             {
                 return new LikeServices(serviceProvider.GetService<SimpleSocialMediaContext>());
             });
+
+            services.AddTransient<ChatServices>(serviceProvider =>
+            {
+                return new ChatServices(serviceProvider.GetService<SimpleSocialMediaContext>());
+            });
+
+            services.AddTransient<MessageServices>(serviceProvider =>
+            {
+                return new MessageServices(serviceProvider.GetService<SimpleSocialMediaContext>());
+            });
         }
     }
 }
