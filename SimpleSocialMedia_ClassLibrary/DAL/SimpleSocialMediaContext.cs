@@ -21,6 +21,7 @@ namespace SimpleSocialMedia_ClassLibrary.DAL
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Like> Likes { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,13 +32,28 @@ namespace SimpleSocialMedia_ClassLibrary.DAL
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.AccountID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comment__Account__4F7CD00D");
+                    .HasConstraintName("FK__Comment__Account__1BC821DD");
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.PostID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comment__PostID__5070F446");
+                    .HasConstraintName("FK__Comment__PostID__1CBC4616");
+            });
+
+            modelBuilder.Entity<Like>(entity =>
+            {
+                entity.HasOne(d => d.Account)
+                    .WithMany(p => p.Likes)
+                    .HasForeignKey(d => d.AccountID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Likes__AccountID__236943A5");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.LikesNavigation)
+                    .HasForeignKey(d => d.PostID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Likes__PostID__245D67DE");
             });
 
             modelBuilder.Entity<Post>(entity =>
@@ -46,7 +62,7 @@ namespace SimpleSocialMedia_ClassLibrary.DAL
                     .WithMany(p => p.Posts)
                     .HasForeignKey(d => d.AccountID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Post__AccountID__4CA06362");
+                    .HasConstraintName("FK__Post__AccountID__18EBB532");
             });
 
             OnModelCreatingPartial(modelBuilder);

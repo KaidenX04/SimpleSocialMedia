@@ -19,6 +19,10 @@
             </div>
             <p class="w-100 text-center mt-2">Likes: @post.Likes</p>
             <form method="post" class="mx-auto" class="d-flex justify-content-center">
+                @if (Model.ViewCommentPost == post.PostID)
+                {
+                    <input type="text" asp-for="ViewingComments" value="1" class="invisible width-0">
+                }
                 <input type="text" asp-for="PostID" value="@post.PostID" class="invisible width-0">
                 <input type="submit" asp-page-handler="LikePost" class="btn btn-primary" value="Like">
                 <input type="submit" asp-page-handler="ViewComment" class="btn btn-primary" value="Comments">

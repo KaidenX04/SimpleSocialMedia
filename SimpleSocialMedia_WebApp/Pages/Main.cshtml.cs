@@ -18,8 +18,10 @@ namespace SimpleSocialMedia_WebApp.Pages
         [BindProperty]
         public int CommentID { get; set; }
 
+        public int ViewCommentPost { get; set; }
+
         [BindProperty]
-        public int ViewCommentPost { get; set; } = -1;
+        public int ViewingComments { get; set; }
 
         public List<Comment> Comments { get; set; }
 
@@ -29,16 +31,19 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         private readonly CommentServices _commentServices;
 
+        private readonly LikeServices _likeServices;
+
         [BindProperty]
         public string CommentText { get; set; }
 
         public List<Post> Posts;
 
-        public MainModel(AccountServices accountServices, PostServices postServices, CommentServices commentServices)
+        public MainModel(AccountServices accountServices, PostServices postServices, CommentServices commentServices, LikeServices likeServices)
         {
             _accountServices = accountServices;
             _postServices = postServices;
             _commentServices = commentServices;
+            _likeServices = likeServices;
         }
 
         public IActionResult OnGet()
@@ -53,17 +58,40 @@ namespace SimpleSocialMedia_WebApp.Pages
                 return Redirect("/Index");
             }
             AccountID = Login.AccountID;
-            return Page();
+            ViewCommentPost = -1;
+            return null;
         }
 
         public IActionResult OnPostLikePost()
         {
-            _postServices.LikePost(PostID);
-            return RedirectToPage();
+            if (!_likeServices.IsLiked(AccountID, PostID))
+            {
+                _likeServices.CreateLike(AccountID, PostID);
+                _postServices.LikePost(PostID);
+            }
+            if (ViewingComments == 1)
+            {
+                Posts = _postServices.GetPosts_All();
+                ViewCommentPost = PostID;
+                Comments = _commentServices.GetComment_Post(PostID);
+                ModelState.Clear();
+                return Page();
+            }
+            ViewingComments = 0;
+            ViewCommentPost = -1;
+            Comments = _commentServices.GetComment_Post(PostID);
+            Posts = _postServices.GetPosts_All();
+            ModelState.Clear();
+            return Page();
         }
 
         public IActionResult OnPostComment()
         {
+            string username = Request.Cookies["Username"];
+            string password = Request.Cookies["Password"];
+            Login = _accountServices.GetAccount_Login(username, password);
+            AccountID = Login.AccountID;
+
             if (!string.IsNullOrWhiteSpace(CommentText))
             {
                 Comment comment = new();
@@ -76,13 +104,20 @@ namespace SimpleSocialMedia_WebApp.Pages
             Posts = _postServices.GetPosts_All();
             ViewCommentPost = PostID;
             Comments = _commentServices.GetComment_Post(PostID);
-            CommentText = " ";
+            CommentText = "";
             ModelState.Clear();
             return Page();
         }
 
         public IActionResult OnPostViewComment()
         {
+            if (ViewingComments == 1)
+            {
+                ViewCommentPost = -1;
+                Comments = _commentServices.GetComment_Post(PostID);
+                Posts = _postServices.GetPosts_All();
+                return Page();
+            }
             ViewCommentPost = PostID;
             Comments = _commentServices.GetComment_Post(PostID);
             Posts = _postServices.GetPosts_All();

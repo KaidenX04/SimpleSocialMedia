@@ -15,14 +15,21 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         private readonly PostServices _postServices;
 
+        private readonly CommentServices _commentServices;
+
         public Account Login { get; set; }
 
         public int PostsCount { get; set; }
 
-        public AccountModel(AccountServices accountServices, PostServices postServices)
+        public int CommentsCount { get; set; }
+
+        public int LikeCount { get; set; }
+
+        public AccountModel(AccountServices accountServices, PostServices postServices, CommentServices commentServices)
         {
             _accountServices = accountServices;
             _postServices = postServices;
+            _commentServices = commentServices;
         }
 
         public IActionResult OnGet()
@@ -35,6 +42,8 @@ namespace SimpleSocialMedia_WebApp.Pages
                 return Redirect("/Index");
             }
             PostsCount = _postServices.GetPostCount_Account(Login.AccountID);
+            CommentsCount = _commentServices.GetCommentCount_Account(Login.AccountID);
+            LikeCount = _postServices.GetLikeCount_Account(Login.AccountID);
             return Page();
         }
     }

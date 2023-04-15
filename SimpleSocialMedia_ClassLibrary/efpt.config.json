@@ -23,11 +23,15 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Likes]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Post]",
          "ObjectType": 0
       }
    ],
-   "UiHint": "DESKTOP-MD9PK8N\\SQLEXPRESS.SimpleSocialMedia",
+   "UiHint": "kaidendbserver.SimpleSocialMedia",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,

@@ -14,6 +14,7 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
         public Account()
         {
             Comments = new HashSet<Comment>();
+            Likes = new HashSet<Like>();
             Posts = new HashSet<Post>();
         }
 
@@ -33,6 +34,8 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
 
         [InverseProperty("Account")]
         public virtual ICollection<Comment> Comments { get; set; }
+        [InverseProperty("Account")]
+        public virtual ICollection<Like> Likes { get; set; }
         [InverseProperty("Account")]
         public virtual ICollection<Post> Posts { get; set; }
     }

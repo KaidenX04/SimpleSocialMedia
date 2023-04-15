@@ -30,6 +30,11 @@ namespace SimpleSocialMedia_ClassLibrary
             {
                 return new CommentServices(serviceProvider.GetService<SimpleSocialMediaContext>());
             });
+
+            services.AddTransient<LikeServices>(serviceProvider =>
+            {
+                return new LikeServices(serviceProvider.GetService<SimpleSocialMediaContext>());
+            });
         }
     }
 }

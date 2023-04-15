@@ -41,5 +41,16 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
         {
             return _context.Posts.Where(x => x.AccountID == accountID).Count();
         }
+
+        public int GetLikeCount_Account(int accountID)
+        {
+            int count = 0;
+            List<Post> posts = _context.Posts.Where(x => x.AccountID == accountID).ToList();
+            foreach (Post post in posts) 
+            { 
+                count += post.Likes;
+            }
+            return count;
+        }
     }
 }
