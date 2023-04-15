@@ -79,7 +79,13 @@ namespace SimpleSocialMedia_ClassLibrary.DAL
                     .WithMany(p => p.Messages)
                     .HasForeignKey(d => d.AccountID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Message__Account__503BEA1C");
+                    .HasConstraintName("FK__Message__Account__531856C7");
+
+                entity.HasOne(d => d.Chat)
+                    .WithMany(p => p.Messages)
+                    .HasForeignKey(d => d.ChatID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Message__ChatID__540C7B00");
             });
 
             modelBuilder.Entity<Post>(entity =>

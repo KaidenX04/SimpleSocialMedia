@@ -23,7 +23,6 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
         [ForeignKey("AccountID")]
         [InverseProperty("Messages")]
         public virtual Account Account { get; set; }
-
         [ForeignKey("ChatID")]
         [InverseProperty("Messages")]
         public virtual Chat Chat { get; set; }

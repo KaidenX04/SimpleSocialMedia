@@ -11,6 +11,11 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
     [Table("Chat")]
     public partial class Chat
     {
+        public Chat()
+        {
+            Messages = new HashSet<Message>();
+        }
+
         [Key]
         public int ChatID { get; set; }
         public int Account1ID { get; set; }
@@ -22,5 +27,7 @@ namespace SimpleSocialMedia_ClassLibrary.Entities
         [ForeignKey("Account2ID")]
         [InverseProperty("ChatAccount2s")]
         public virtual Account Account2 { get; set; }
+        [InverseProperty("Chat")]
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }
