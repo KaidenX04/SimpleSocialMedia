@@ -27,6 +27,20 @@ Create Table Likes (
 	Liked bit not null
 )
 
+Create Table Chat (
+	ChatID int not null identity(1, 1) primary key,
+	Account1ID int not null foreign key references Account(AccountID),
+	Account2ID int not null foreign key references Account(AccountID),
+)
+
+Create Table Message (
+	MessageID int not null identity(1, 1) primary key,
+	AccountID int not null foreign key references Account(AccountID),
+	Text varchar(200) not null
+)
+
+DROP TABLE Message
+DROP TABLE Chat
 DROP TABLE Likes
 DROP TABLE Comment
 DROP TABLE Post
