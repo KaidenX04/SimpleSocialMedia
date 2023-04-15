@@ -64,6 +64,11 @@ namespace SimpleSocialMedia_WebApp.Pages
 
         public IActionResult OnPostLikePost()
         {
+            string username = Request.Cookies["Username"];
+            string password = Request.Cookies["Password"];
+            Login = _accountServices.GetAccount_Login(username, password);
+            AccountID = Login.AccountID;
+
             if (!_likeServices.IsLiked(AccountID, PostID))
             {
                 _likeServices.CreateLike(AccountID, PostID);

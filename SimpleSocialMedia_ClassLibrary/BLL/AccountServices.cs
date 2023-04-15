@@ -25,6 +25,12 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
 
         public void CreateAccount(string username, string password) 
         {
+            Account exists = _context.Accounts.Where(x => x.Username == username).FirstOrDefault(); 
+            if (exists != null) 
+            {
+                throw new Exception("Account exists");
+            }
+
             Account account = new();
             account.Username = username;
             account.Password = password;

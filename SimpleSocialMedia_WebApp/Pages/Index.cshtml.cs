@@ -51,11 +51,18 @@ namespace SimpleSocialMedia_WebApp.Pages
             }
             if (ModelState.IsValid) 
             {
-                _accountServices.CreateAccount(Username, Password);
-                Account login = _accountServices.GetAccount_Login(Username, Password);
-                Response.Cookies.Append("Username", $"{login.Username}");
-                Response.Cookies.Append("Password", $"{login.Password}");
-                return RedirectToPage("Main");
+                try 
+                {
+                    _accountServices.CreateAccount(Username, Password);
+                    Account login = _accountServices.GetAccount_Login(Username, Password);
+                    Response.Cookies.Append("Username", $"{login.Username}");
+                    Response.Cookies.Append("Password", $"{login.Password}");
+                    return RedirectToPage("Main");
+                }
+                catch (Exception ex) 
+                {
+                    ModelState.AddModelError("Account", "Account already exists with that username");
+                }
             }
             return Page();
         }
@@ -75,6 +82,10 @@ namespace SimpleSocialMedia_WebApp.Pages
                 try
                 {
                     Account login = _accountServices.GetAccount_Login(Username, Password);
+                    if (login == null) 
+                    {
+                        throw new Exception("");
+                    }
                     Response.Cookies.Append("Username", $"{login.Username}");
                     Response.Cookies.Append("Password", $"{login.Password}");
                     return RedirectToPage("Main");
