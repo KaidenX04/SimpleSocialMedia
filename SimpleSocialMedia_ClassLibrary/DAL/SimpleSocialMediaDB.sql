@@ -36,6 +36,7 @@ Create Table Chat (
 Create Table Message (
 	MessageID int not null identity(1, 1) primary key,
 	AccountID int not null foreign key references Account(AccountID),
+	ChatID int not null foreign key references Chat(ChatID),
 	Text varchar(200) not null
 )
 

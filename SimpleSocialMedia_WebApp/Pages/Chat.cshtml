@@ -14,7 +14,7 @@
     @foreach (var chat in @Model.chats)
     {
         <div class="w-100 max-width-50 bg-dark text-white rounded mx-auto my-3 d-flex p-3">
-            <h2 class="me-auto">@Model.GetUsername_AccountID(Model.CorrectAccountId(chat.Account1ID, chat.Account2ID))</h2>
+            <h3 class="me-auto">@Model.GetUsername_AccountID(Model.CorrectAccountId(chat.Account1ID, chat.Account2ID))</h3>
             <form method="post" class="d-block ms-auto">
                 <input type="text" value="@Model.CorrectAccountId(chat.Account1ID, chat.Account2ID)" class="invisible width-0" asp-for="ChatAccount"/>
                 <input type="submit" class="btn btn-primary" value="Message" asp-page-handler="Message"/>
