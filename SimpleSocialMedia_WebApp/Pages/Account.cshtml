@@ -1,20 +1,26 @@
-﻿@page
+﻿@page "{viewAccountID?}"
 @model SimpleSocialMedia_WebApp.Pages.AccountModel
 @{
     ViewData["Title"] = "Account";
 }
 
 <div class="w-100 d-flex justify-content-center my-3">
-    <form method="post">
-        <a href="/Main" class="btn btn-primary">Back</a>
-    </form>
+    <a href="/Main" class="btn btn-primary">Back</a>
 </div>
 
 <div class="container mt-3">
     <div class="w-100 max-width-50 bg-dark text-white rounded mx-auto p-3">
-        <h1>@Model.Login.Username</h1>
+        <h1>@Model.Username</h1>
         <h2>Posts: @Model.PostsCount</h2>
         <h2>Comments: @Model.CommentsCount</h2>
         <h2>Likes Recieved: @Model.LikeCount</h2>
     </div>
 </div>
+
+@if(Model.OtherAccount.AccountID != Model.Login.AccountID)
+{
+    <form method="post" class="container text-center">
+        <button class="btn btn-primary mt-3" type="submit" asp-page-handler="CreateChat">Chat</button>
+    </form>
+}
+

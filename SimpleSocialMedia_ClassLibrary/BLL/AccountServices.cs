@@ -20,7 +20,7 @@ namespace SimpleSocialMedia_ClassLibrary.BLL
 
         public Account GetAccount_ID(int id)
         {
-            return _context.Accounts.Where(x => x.AccountID == id).First();
+            return _context.Accounts.Where(x => x.AccountID == id).FirstOrDefault();
         }
 
         public void CreateAccount(string username, string password)
