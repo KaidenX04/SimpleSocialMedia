@@ -17,7 +17,7 @@
     </div>
 </div>
 
-@if(Model.OtherAccount.AccountID != Model.Login.AccountID)
+@if(Model.OtherAccount is not null && Model.Login is not null && Model.OtherAccount.AccountID != Model.Login.AccountID)
 {
     <form method="post" class="container text-center">
         <button class="btn btn-primary mt-3" type="submit" asp-page-handler="CreateChat">Chat</button>

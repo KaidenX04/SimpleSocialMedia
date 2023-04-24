@@ -66,6 +66,8 @@ namespace SimpleSocialMedia_WebApp.Pages
                 return Redirect("Index");
             }
 
+            AccountID = Login.AccountID;
+
             if (!_likeServices.IsLiked(AccountID, PostID))
             {
                 _likeServices.CreateLike(AccountID, PostID);
@@ -113,7 +115,7 @@ namespace SimpleSocialMedia_WebApp.Pages
             Comments = _commentServices.GetComment_Post(PostID);
             CommentText = "";
             ModelState.Clear();
-            return Page();
+            return RedirectToPage();
         }
 
         public IActionResult OnPostViewComment()

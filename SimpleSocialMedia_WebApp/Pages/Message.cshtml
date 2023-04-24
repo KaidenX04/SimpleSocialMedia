@@ -10,16 +10,19 @@
 
 
 <form method="post" class="container d-flex justify-content-center bg-dark text-white max-width-50 mx-auto p-3 rounded mt-3 flex-wrap">
+    <h3 class="w-100 text-left">@Model.GetUsername_AccountID(Model.ChatAccountID)</h3>
     <input type="text" asp-for="MessageText" class="form-control w-100" />
     <input type="submit" asp-page-handler="SendMessage" value="Send" class="btn btn-primary d-block mx-auto mt-2" />
 </form>
 
 <div class="container bg-dark text-white max-width-50 rounded p-3 mt--1">
-    @foreach (var message in Model.messages)
-    {
-        <div class="my-3">
-            <h4>@Model.GetUsername_AccountID(message.AccountID)</h4>
-            <p>@message.Text</p>
-        </div>
-    }
+    <ul class="list-group mt-3 w-100 rounded bg-secondary list-unstyled overflow-hidden p-2">
+        @foreach (var message in Model.messages)
+            {
+            <li class="w-100 p-1 bg-secondary text-white">
+                <h4>@Model.GetUsername_AccountID(message.AccountID)</h4>
+                <p>@message.Text</p>
+            </li>
+        }
+    </ul>
 </div>

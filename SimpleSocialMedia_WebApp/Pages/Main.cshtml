@@ -34,13 +34,13 @@
                 </div>
                 <form method="post" class="w-100 mt-3 text-center">
                     <input type="text" asp-for="PostID" value="@post.PostID" class="invisible width-0">
-                    <input type="text" asp-for="CommentText" class="form-control w-75 mb-1 mx-auto">
+                    <input type="text" asp-for="CommentText" value="@Model.CommentText" class="form-control w-75 mb-1 mx-auto">
                     <input type="submit" asp-page-handler="Comment" class="btn btn-primary" value="Comment">
                 </form>
-                <ul class="list-group mt-3 w-100 ">
+                <ul class="list-group mt-3 w-100 rounded bg-secondary list-unstyled overflow-hidden p-2">
                     @foreach (var comment in Model.Comments)
                     {
-                        <li class="list-group-item m-1 w-100 p-1 bg-secondary text-white">
+                        <li class="w-100 p-1 bg-secondary text-white">
                             <a class="unstyled-link" href="Account/@comment.AccountID"><h4 class="font-weight-bold">@Model.GetUsernameFromComment(comment)</h4></a>
                             <p>@comment.Text</p>
                         </li>
